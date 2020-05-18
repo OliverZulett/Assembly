@@ -31,8 +31,8 @@ repetir:
 mostrar:
 	mov dx,0000h ; limpiamos el registro DX
 	pop dx ; saca un elemento de la pila en DX
-	mov ah,02h ; iniciamos la funcion para mostrar caracter
 	add dl,30h ; sumamos 30h = 48 para volverlo ASCCII
+	mov ah,02h ; iniciamos la funcion para mostrar caracter
 	int 21h ; mostramos el caracter en dl
 	loop mostrar ; ejecutamos el loop
 	

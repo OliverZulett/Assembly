@@ -1,46 +1,54 @@
-; leer un string y volverlo a mayusculas
+;Muestra una cadena con espacios entre los caracteres, ingresada por consola en minusculas
 .model small
 .stack 64
 .data
-    nom db 20 dup("$") ;llenamos una cadena con $ de tamaño 20
-    monmay db 20 dup("$")
-    m1 db "ingrese su nombre:",10,13,"$"
-    m2 db 10,13,"Hola....","$" ;10,13 es salto de line<
-    m3 db 10,13,"su nombre en mayusculas es: ","$" ;10,13 es salto de line<
+    ; declaramos una cadena de longitud = 20 que estara llena del signo $
+    ; ya que una cadena siempre termina con $
+    _name db 20 dup("$") 
+    esp_name db 40 dup("$") 
+    message_1 db "Ingresa tu nombre:",10,13,"$"
+    message_2 db 10,13,"Hola.... ","$" ;10,13 es salto de line<
+    message_3 db 10,13,"tu nombre con espacios es: ","$" ;10,13 es salto de line<
 .code
 inicio:
 	mov ax,@data
 	mov ds,ax
 ;-----------------------------
-    mov ah,09h
-    lea dx,m1
-    int 21h
-    mov si,0
 
-while1:
-    mov ah,01h
+    mov ah,09h ; inicia la funcion para mostrar cadenas; inicia la funcion para mostrar cadenas
+    lea dx,message_1  ; asigna la cadena message_1 a dx
+    int 21h ; muestra message_1
+    ; iniciamos el contador si de la cadena _name
+    mov si,0 ; si = 0
+    ; iniciamos el contador di la cadena esp_name
+    mov di,0 ; di = 0
+
+read_character:
+    mov ah,01h ; lee el caracter por pantalla
     int 21h ; aqui se guarda el caracter leido
-    cmp al,13 ;compara si entro un enter
-    je mostrar
-    mov nom[si],al ;actualiza el puntero
-    sub al,20h
-    mov monmay[si],al
-    inc si
-    jmp while1
+    ; el caracter se guarda en al
+    cmp al,13 ;compara si el caracter guardado es igual a 13 (enter)
+    je mostrar ;si es igual salta a 'mostrar'
+    mov _name[si],al ; asigna el caracter a la posicion si de la cadena _name
+    mov esp_name[di],al ; asigna el caracter a la posicion si de la cadena esp_name
+    inc di ; di ++
+    mov esp_name[di]," " ; asigna el caracter a la posicion si de la cadena esp_name
+    inc si ; si ++
+    inc di ; di ++
+    jmp read_character ; vuelve a leer un caracter
 
 mostrar:
-    mov ah,09h
-    lea dx,m2
-    int 21h
-    lea dx,nom
-    int 21h
-    lea dx,m3
-    int 21h
-    lea dx, monmay
-    int 21h
+    mov ah,09h ; inicia la funcion para mostrar cadenas
+    lea dx,message_2 ; asigna la cadena message_2 a dx
+    int 21h ; muestra la cadena
+    lea dx,_name ; asigna la cadena _name a dx
+    int 21h ; muestra la cadena
+    lea dx,message_3 ; asigna la cadena message_3 a dx
+    int 21h ; muestra la cadena
+    lea dx,esp_name ; asigna la cadena esp_name a dx
+    int 21h ; muestra la cadena
+
 ;-----------------------------
 	mov ah,4ch
 	int 21h
 end inicio
-
-; practica 3 cadenas bailarinas juanito JuAnItO

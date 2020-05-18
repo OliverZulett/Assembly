@@ -1,40 +1,31 @@
-; dado un determinado año calcular la edad de una persona y 
-; decir si es menor mayor o igual
-;Generar para N térnimos: 5, 10, 15, 20, 25, ...
+;Muestra un caracter ingresado por consola
 
 .model small
 .stack 64
 .data
-    mayor db "Es mayor de edad$"
-    menor db "Es nemos de edad"
-    edad dw 1991
+    message_1 db "ingrese un caracter: ",10,13,"$" ;10,13 es salto de line<
+    message_2 db 10,13,"Usted a ingesado el caracter: ","$" 
 .code
 inicio:
 	mov ax,@data
 	mov ds,ax
 ;-----------------------------
-	mov ax, 0000h
-    mov bx, 2002
-    mov ax, 2020
-    sub ax, bx
+    mov ah,09h ; inicia la funcion para mostrar cadenas
+    lea dx,message_1 ; asigna la cadena message_1 a dx
+    int 21h ; muestra la cadena
 
-    cmp ax, 18
-    jae may ;mayor o igual
-    jna men
-    jmp salir
+    mov ah,01h ; lee el caracter por pantalla
+    ; el caracter se guarda en al
+    int 21h ; guarda el caracter leido
 
-may: 
-    mov ah,09h
-    lea dx,mayor
-    int 21h
-    jmp salir
-men:
-    mov ah,09h
-    lea dx,menor
-    int 21h
-    jmp salir
+    mov ah,09h ; inicia la funcion para mostrar cadenas
+    lea dx,message_2 ; asigna la cadena message_2 a dx
+    int 21h ; muestra la cadena
 
-salir:
+    mov ah,02h ; inicia la funcion para mostrar caracter
+    mov dl,al ; dl = al mueve el caracter a dl para mostrarlo
+    int 21h ; muestra el caracter
+
 ;-----------------------------
 	mov ah,4ch
 	int 21h

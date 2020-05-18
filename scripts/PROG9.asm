@@ -1,8 +1,8 @@
-;convierte las minusculas en mayusculas
+;convierte una cadena en minusculas a mayusculas
 .model small
 .stack 64
 .data
-	c db "joshua zulett","$"
+	c db "soy una cadena en minusculas","$"
 	
 .code
 inicio:

@@ -1,57 +1,42 @@
-;Generar para N térnimos: 5, 10, 15, 20, 25, ...
+; Compara años para ver si una persona es mayor de edad segun su fecha de nacimientos
 
 .model small
 .stack 64
 .data
-	m1 db "cociente: $"
-	m2 db "residuo: $"
+    mayor_edad db "Es mayor de edad$"
+    menor_edad db "Es menor de edad$"
+    anio_nacimiento dw 1999
+    anio_actual dw 2020
 .code
-	n dw 10
 inicio:
 	mov ax,@data
 	mov ds,ax
 ;-----------------------------
-	mov ax,0000h
-    mov ax,5
-	mov cx,n
-    add cx,1
-    mov bx,10
 
-procesar: 
-	dec cx
-    mov ax,0000h
-    mov ax,5
-    mul cx
-    ;   mov ax,cx
-    cmp cx,0
-    je numero
-    jmp repetir
+	mov ax, 0000h ; limpiamos el registro AX
+    mov bx, anio_nacimiento ; bx = 1991
+    mov ax, anio_actual ; ax = 2020
+    sub ax, bx ; ax = ax - bx
 
-numero:
-    mov ax,0000h
-    mov ax,n
-    mov cx,2
-    mul cx
-    mov cx,ax
-    dec cx
-    jmp mostrar
+    cmp ax, 18 ; ax = 18 ?
+    jae may ; si ax >= 18 salta a 'may'
+    jna men ; si ax < 18 salta a 'may'
+    ; jmp salir 
 
-repetir:
-	mov dx,0000h
-	div bx ; divide el ax ocn el bx
-	push dx ; guardamos el residuo en la pila
-	cmp ax, 0 ;compara si es igual n cero
-	je procesar ;si es igual salta n la etiqueta declarada
-	jmp repetir ; salta n la etiqueta declarada
+may: 
+    mov ah,09h ; inicia la funcion para mostrar cadenas
+    lea dx,mayor_edad ; asigna la cadena mayor_edad a dx
+    int 21h ; muestra la cadena
+    jmp salir
 
-mostrar:
-	mov dx,0000h
-	pop dx
-	add dl,30h ; solo se suma al dl por que la pila solo nos mostrara una pila por vez
-	mov ah,02h
-	int 21h
-	loop mostrar ;ejecutamos el loop
-	
+men:
+    mov ah,09h ; inicia la funcion para mostrar cadenas
+    lea dx,menor_edad ; asigna la cadena menor_edad a dx
+    int 21h ; muestra la cadena
+    jmp salir
+
+salir:
+
 ;-----------------------------
 	mov ah,4ch
 	int 21h

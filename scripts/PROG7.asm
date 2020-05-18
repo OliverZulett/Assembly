@@ -1,10 +1,10 @@
-;muestra una caratula
+;muestra una mensaje en pantalla con cadenas
 .model small
 .stack 64
 .data
-	caratula db "**********************",10,13
+	mensaje db "**********************",10,13
 			 db "*                    *",10,13
-			 db "*   ",01h,"joshua zulett   *",10,13
+			 db "*   ",01h,"oliver zulett   *",10,13
 			 db "*                    *",10,13
 			 db "**********************",10,13
 			 db "$"
@@ -16,7 +16,7 @@ inicio:
 ;----------------------------
 	
 	mov ah,09h ;inicio la funcion para mostrar cadenas
-	lea dx,caratula ;asingo la cadena caratula a dx
+	lea dx,mensaje ;asingo la cadena mensaje a dx
 	int 21h ;muestro la cadena
 	
 ;----------------------------
