@@ -54,6 +54,9 @@ TLINK <nombre del programa>
 17. __PROG17.ASM__ :point_right: Muestra una cadena en MAYUSCULAS ingresada por consola en minusculas.
 18. __PROG18.ASM__ :point_right: Muestra una cadena con espacios entre los caracteres, ingresada por consola.
 19. __PROG19.ASM__ :point_right: Muestra una cadena bailarina, ingresada por consola en minuscula.
+20. __PROG20.ASM__ :point_right: Reemplaza con X los caracteres e de una cadena ingesada por consola.
+21. __PROG21.ASM__ :point_right: Muestra la serie de pares y ceros: 2 0 4 0 6 ....
+22. __PROG22.ASM__ :point_right: Muestra todos loas caracteres asscci junto con su posicion.
 
 
 

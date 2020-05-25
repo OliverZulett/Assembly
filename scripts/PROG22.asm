@@ -1,5 +1,4 @@
-;Joshua oliver zulett pareja
-
+; Muestra todos loas caracteres asscci junto con su posicion
 
 .model small
 .stack 64
