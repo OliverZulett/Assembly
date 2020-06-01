@@ -57,6 +57,7 @@ TLINK <nombre del programa>
 20. __PROG20.ASM__ :point_right: Reemplaza con X los caracteres e de una cadena ingesada por consola.
 21. __PROG21.ASM__ :point_right: Muestra la serie de pares y ceros: 2 0 4 0 6 ....
 22. __PROG22.ASM__ :point_right: Muestra todos loas caracteres asscci junto con su posicion.
+23. __PROG23.ASM__ :point_right: Cambia el color de la pantalla.
 
 
 
