@@ -58,8 +58,10 @@ TLINK <nombre del programa>
 21. __PROG21.ASM__ :point_right: Muestra la serie de pares y ceros: 2 0 4 0 6 ....
 22. __PROG22.ASM__ :point_right: Muestra todos loas caracteres asscci junto con su posicion.
 23. __PROG23.ASM__ :point_right: Cambia el color de la pantalla.
-
-
+24. __PROG24.ASM__ :point_right: Genera un cuadrado en la pantalla.
+25. __PROG25.ASM__ :point_right: Genera tres lineas de colores en la pantalla.
+26. __PROG26.ASM__ :point_right: Divide la pantalla en linea de colores.
+27. __PROG27.ASM__ :point_right: Genera cuadrados de colores uno dentro de otro.
 
 #### Colabora :sunglasses:
 
