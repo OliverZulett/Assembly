@@ -1,4 +1,4 @@
-; Divide la pantalla en linea de colores
+; Muestra cinco texto en el centro de una pantalla
 
 .model small
 .stack 64
@@ -6,11 +6,17 @@
 .data
 fini db 0 ; columna inicial de la pantalla
 cini db 0 ; fila inicial de la pantalla
-ffin db 0 ; fila final de la pantalla
+ffin db 24 ; fila final de la pantalla
 cfin db 79 ; columna final de la pantalla
-linea db 1 ; numero de lineas que se va a recorrer
-color db 42h ; 0100   0001
+linea db 0 ; numero de lineas que se va a recorrer
+color db 12h ; 0100   0001
              ;  RGB    RGB 
+
+cad db 'HOLA$'
+
+fil db 12
+col db 40
+pag db 0
 
 .code
 Inicio:
@@ -21,25 +27,55 @@ mov ds, ax
 
 call clrscr; genera el primer color
 
-mov si,0 ;inicio el contador en 0
-mov cx,24 ;declaro el limite del for
+call gotoxy
 
-for:
+mov ah, 09h
+lea dx, cad
+int 21h
 
-	add si,1 ;agrego 1 al contador
-    add fini, 1 ; incrementa la pocicion
-    add ffin, 1 ; incrementa la pocicion
-    add color, 10h ; agrega 10 unidades al color de fondo
-    
-    call clrscr; genera el color
-	
-    loop for ;vuelvo al ciclo
+mov fil, 6
+mov col, 20
+call gotoxy
+int 21h ; no es necesario llamar a 09h
+
+mov fil, 6
+mov col, 60
+call gotoxy
+int 21h ; no es necesario llamar a 09h
+
+mov fil, 18
+mov col, 20
+call gotoxy
+int 21h ; no es necesario llamar a 09h
+
+mov fil, 18
+mov col, 60
+call gotoxy
+int 21h ; no es necesario llamar a 09h
+
 
 ;-----------------------------
 mov ah,4ch
 int 21h
 
 ;-----procedimientos
+
+gotoxy proc
+    push ax
+    push bx
+    push dx
+
+    mov ah, 02h ; funcion para mover cursos
+    mov bh, pag ; numero de pagina en la que se trabajara 
+    mov dh, fil ; fila donde se ubicara el cursos
+    mov dl, col ; columna donde se ubicara el cursor
+    int 10h ; ejecutamos la funcion
+
+    pop dx
+    pop bx
+    pop ax
+    ret
+gotoxy endp
 
 clrscr proc near
 ; siempre hay que salvar estas variables antes de ejecutar procedimientos

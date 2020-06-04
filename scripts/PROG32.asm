@@ -1,15 +1,15 @@
-; Divide la pantalla en linea de colores
+; Genera un cuadro en el centro de la pantalla dividido en lineas de colores
 
 .model small
 .stack 64
 
 .data
-fini db 0 ; columna inicial de la pantalla
-cini db 0 ; fila inicial de la pantalla
-ffin db 0 ; fila final de la pantalla
-cfin db 79 ; columna final de la pantalla
-linea db 1 ; numero de lineas que se va a recorrer
-color db 42h ; 0100   0001
+fini db 5 ; columna inicial de la pantalla
+ffin db 6 ; fila final de la pantalla
+cini db 20 ; fila inicial de la pantalla
+cfin db 60 ; columna final de la pantalla
+linea db 0 ; numero de lineas que se va a recorrer
+color db 12h ; 0100   0001
              ;  RGB    RGB 
 
 .code
@@ -19,20 +19,13 @@ mov ds, ax
 
 ;-----------------------------
 
-call clrscr; genera el primer color
-
-mov si,0 ;inicio el contador en 0
-mov cx,24 ;declaro el limite del for
+mov cx,15 ;declaro el limite del for
 
 for:
-
-	add si,1 ;agrego 1 al contador
-    add fini, 1 ; incrementa la pocicion
-    add ffin, 1 ; incrementa la pocicion
-    add color, 10h ; agrega 10 unidades al color de fondo
-    
     call clrscr; genera el color
-	
+    add fini, 1
+    add ffin, 1
+    add color, 10h ; agrega 10 unidades al color de fondo
     loop for ;vuelvo al ciclo
 
 ;-----------------------------
