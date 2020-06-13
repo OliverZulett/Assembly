@@ -4,13 +4,21 @@
 .stack 64
 
 .data
-fini db 0 ; columna inicial de la pantalla
-cini db 0 ; fila inicial de la pantalla
-ffin db 0 ; fila final de la pantalla
-cfin db 79 ; columna final de la pantalla
-linea db 1 ; numero de lineas que se va a recorrer
-color db 42h ; 0100   0001
-             ;  RGB    RGB 
+
+; Datos para cambiar los colores por fila
+fini db 0
+cini db 0
+ffin db 0
+cfin db 79
+linea db 1
+color db 40h 
+
+; cadena que se mostrara por fila
+cad db "SOY UNA FILA DE COLORES",10,13,"$"
+
+; datos para mover el cursor al principio
+col db 0
+fil db 0
 
 .code
 Inicio:
@@ -20,20 +28,27 @@ mov ds, ax
 ;-----------------------------
 
 call clrscr; genera el primer color
+mov si,0 ; inicia el contador en 0
+mov cx,24 ; declara el limite del for
 
-mov si,0 ;inicio el contador en 0
-mov cx,24 ;declaro el limite del for
-
-for:
-
-	add si,1 ;agrego 1 al contador
+change_color:
+	add si,1 ; agrego 1 al contador
     add fini, 1 ; incrementa la pocicion
     add ffin, 1 ; incrementa la pocicion
-    add color, 10h ; agrega 10 unidades al color de fondo
-    
+    add color, 11h ; agrega 1 unidades al color de fondo y 1 al color de texto
     call clrscr; genera el color
-	
-    loop for ;vuelvo al ciclo
+    loop change_color ;vuelvo a cambiar el color
+
+call gotoxy ; devuelve el cursor al inicio
+
+mov si,0
+mov cx,25
+
+;mostramos el texto en cada linea
+show_text:
+    add si,1
+    call mostrarcad
+    loop show_text
 
 ;-----------------------------
 mov ah,4ch
@@ -41,25 +56,51 @@ int 21h
 
 ;-----procedimientos
 
+; limpiar pantalla
 clrscr proc near
-; siempre hay que salvar estas variables antes de ejecutar procedimientos
-push ax 
-push bx
-push cx
-
-mov ah, 06h ; permite hacer recorrido de la pantalla 
-mov bh,color  ; color del recorrido (color de fondo, color de frente)
-mov al,linea  ; linea que va a recorrer
-mov ch,fini  ; fila inicial donde comenzara el recorrido
-mov cl,cini  ; columna inicial donde comenzara el recorrido
-mov dh,ffin  ; fila final donde termina el recorrido
-mov dl,cfin  ; columna final donde termina el recorrido
-int 10h
-
-pop cx
-pop bx
-pop ax
-ret
+	push ax
+	push bx
+	push cx
+	mov ah, 06h
+	mov bh,color
+	mov al,linea
+	mov ch,fini
+	mov cl,cini
+	mov dh,ffin
+	mov dl,cfin
+	int 10h
+	pop cx
+	pop bx
+	pop ax
+	ret
 clrscr endp
+
+; mostrar cadena
+mostrarcad proc
+	push ax
+	push dx
+	mov ah,09h
+	lea dx,cad
+	int 21h
+	pop dx
+	pop ax
+	ret
+mostrarcad endp
+
+; gotoxy
+gotoxy proc near
+	push dx
+	push bx
+	push ax
+	mov ah,02h
+	mov bh,00
+	mov dh,fil
+	mov dl,col
+	int 10h
+	pop ax
+	pop bx
+	pop dx
+	ret
+gotoxy endp
 
 end Inicio

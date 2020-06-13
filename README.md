@@ -62,6 +62,15 @@ TLINK <nombre del programa>
 25. __PROG25.ASM__ :point_right: Genera tres lineas de colores en la pantalla.
 26. __PROG26.ASM__ :point_right: Divide la pantalla en linea de colores.
 27. __PROG27.ASM__ :point_right: Genera cuadrados de colores uno dentro de otro.
+28. __PROG28.ASM__ :point_right:
+29. __PROG29.ASM__ :point_right:
+30. __PROG30.ASM__ :point_right:
+31. __PROG31.ASM__ :point_right:
+32. __PROG32.ASM__ :point_right:
+33. __PROG33.ASM__ :point_right:
+34. __PROG34.ASM__ :point_right:
+35. __PROG35.ASM__ :point_right:
+36. __PROG36.ASM__ :point_right:
 
 #### Colabora :sunglasses:
 
