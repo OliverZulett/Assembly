@@ -69,8 +69,9 @@ TLINK <nombre del programa>
 32. __PROG32.ASM__ :point_right:
 33. __PROG33.ASM__ :point_right:
 34. __PROG34.ASM__ :point_right:
-35. __PROG35.ASM__ :point_right:
-36. __PROG36.ASM__ :point_right:
+35. __PROG35.ASM__ :point_right: Mueve un caracter en pantalla con las flechas direccionales y terina con la tecla end.
+36. __PROG36.ASM__ :point_right: Pequeño juego que identifica cuando el personaje llega a los border.
+37. __PROG37.ASM__ :point_right: Muestra un menu de opciones por pantalla.
 
 #### Colabora :sunglasses:
 

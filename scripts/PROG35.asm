@@ -1,4 +1,4 @@
-; muevve un elemento en pantalla con las flechas de direccion terina con end
+; Mueve un caracter en pantalla con las flechas direccionales y terina con la tecla end.
 
 .model small
 .stack 64
@@ -18,7 +18,7 @@ cini db 0 ; fila inicial de la pantalla
 cfin db 79 ; columna final de la pantalla
 
 linea db 0
-color db 04h ; 0100   0001
+color db 1bh ; 0100   0001
              ;  RGB    RGB 
 
 .code

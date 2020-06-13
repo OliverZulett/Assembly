@@ -1,3 +1,5 @@
+; Muestra un menu de opciones por pantalla
+
 .model small
 .stack 64
 .data
